@@ -5,36 +5,26 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TeduShop.Model.Abstract;
 
 namespace TeduShop.Model.Models
 {
-    [Table("Menus")]
-    public class Menu
+    [Table("Pages")]
+    public class Page : Auditable
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
         [Required]
-        [MaxLength(50)]
-        public string Name { get; set; }
-
-        [Required]
         [MaxLength(256)]
-        public string URL { get; set; }
-
-        public int? DisplayOrder { get; set; }
-
-        [Required]        
-        public int GroupID { get; set; }
-
-        [ForeignKey("GroupID")]
-        public virtual MenuGroup MenuGroup { get; set; }
-
-        [MaxLength(10)]
-        public string Target { get; set; }
-
+        public string Name { get; set; }
         
-        public bool Status { get; set; }
+        [Column(TypeName = "varchar")]
+        [MaxLength(256)]
+        [Required]
+        public string Alias { get; set; }
+
+        public string Content { get; set; }
     }
 }
